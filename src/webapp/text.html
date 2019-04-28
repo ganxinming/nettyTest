@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var socket;
+    if (window.WebSocket){
+        socket=new WebSocket("ws://localhost:8899/ws");
+        //相当于channelRead0，ev收到服务器端发来的消息
+        socket.onmessage=function (ev) {
+            var rt=document.getElementById("responseText");
+            rt.value=rt.value+"\n"+ev.data;
+        }
+        //相当于连接开启
+        socket.onopen=function (ev) {
+            var rt=document.getElementById("responseText");
+            rt.value="连接开启";
+        }
+        //相当于连接关闭
+        socket.onclose=function (ev) {
+            var rt=document.getElementById("responseText");
+            rt.value=rt.value+"\n"+"连接关闭";
+        }
+    }
+    else {
+        alert("您的浏览器不适合WebSocket");
+    }
+
+    function send(message) {
+        if (!window.socket){
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN){
+            //通过send发送数据
+            socket.send(message);
+        }
+        else {
+            alert("连接未开启");
+        }
+    }
+
+</script>
+<form onsubmit="return false">
+
+    <textarea name="message" style="height: 200px;width: 400px"></textarea>
+    <!-- 这个send的value其实也可以通过值得到-->
+    <input type="button" value="发送数据" onclick="send(this.form.message.value)">
+    <textarea id="responseText" style="width: 400px;height: 200px"></textarea>
+    <input type="button" onclick="document.getElementById('responseText').value=''" value="清空内容">
+</form>
+</body>
+</html>

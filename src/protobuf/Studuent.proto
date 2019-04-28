@@ -1,0 +1,15 @@
+syntax= "proto2";
+//永远不要修改生成的代码，只能修改这里的代码
+//使用方式protoc --java_out=src/main/java  src/protobuf/Studuent.proto
+//产生class文件,具体其他生产方法，可以看官方文档.
+package com.protobuf.test;
+
+option optimize_for = SPEED;//加快解析速度，详细可以去官网查
+option java_package="com.gan.protobufTest";
+option java_outer_classname="MyDataInfo";
+
+message Student{
+    required string name=1;
+    optional int32 id=2;
+    optional string address=3;
+}

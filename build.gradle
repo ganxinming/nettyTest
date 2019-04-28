@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'com.delta.netty'
+version '1.0-SNAPSHOT'
+//源编译和目标编译
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+repositories {
+    // maven库
+    def cn = "http://maven.aliyun.com/nexus/content/groups/public/"
+    def abroad = "http://central.maven.org/maven2/"
+    // 先从url中下载jar若没有找到，则在artifactUrls中寻找
+    maven {
+        url cn
+        artifactUrls abroad
+    }
+}
+
+dependencies {
+    compile group: 'io.netty', name: 'netty-all', version: '4.1.10.Final'
+    compile group: 'com.google.protobuf', name: 'protobuf-java', version: '3.3.1'
+    compile group: 'com.google.protobuf', name: 'protobuf-java-util', version: '3.3.1'
+    compile group: 'org.apache.thrift', name: 'libthrift', version: '0.12.0'
+
+}

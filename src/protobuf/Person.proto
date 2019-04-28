@@ -1,0 +1,37 @@
+syntax= "proto2";
+//永远不要修改生成的代码，只能修改这里的代码
+package com.protobuf.test;
+
+option optimize_for = SPEED;//加快解析速度，详细可以去官网查
+option java_package="com.gan.protobufTest";
+option java_outer_classname="MyDataInfo1";
+message MyMessage{
+    //定义一个枚举类型DataType
+    enum DataType{
+        PersonType=1;
+        DogType=2;
+        CatType=3;
+    }
+    //用data_type来标识传的是哪个枚举类型
+    required DataType data_type=1;
+    //表示每次枚举类型最多只能出现三个中的一个，节省了空间
+    oneof dataBody{
+        Person person=2;
+        Dog dog=3;
+        Cat cat=4;
+    }
+
+}
+message Person{
+    optional string name=1;
+    optional int32 id=2;
+    optional string address=3;
+}
+message Dog{
+    optional string name=1;
+    optional int32 age=2;
+}
+message Cat{
+    optional string name=1;
+    optional int32 age=2;
+}
