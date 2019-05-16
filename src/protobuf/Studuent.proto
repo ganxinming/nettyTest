@@ -4,7 +4,7 @@ syntax= "proto2";
 //产生class文件,具体其他生产方法，可以看官方文档.
 package com.protobuf.test;
 
-option optimize_for = SPEED;//加快解析速度，详细可以去官网查
+option optimize_for = SPEED;//加快解析速度，详细可以去官网查加快解析速度，不写默认是这个
 option java_package="com.gan.protobufTest";
 option java_outer_classname="MyDataInfo";
 

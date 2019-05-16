@@ -1,0 +1,38 @@
+syntax= "proto3";
+//使用方式：gradle generateProto (不能再用以前那种方式，因为那个只会生成message，不会生成service)
+//这个就相当于 在 右边gradle的other中的插件generateProto，使用后生成的代码放在build/generated中
+//生成完代码记得拷贝到java目录中
+package com.protobuf.proto;
+
+option java_package="com.protobuf.proto";
+option java_outer_classname="StudentInfo";
+//将里面的类分成多个文件（就以前都是所有类在一个文件中，这里就分开了）
+option java_multiple_files=true;
+//这是protobuf中定义service的方法，跟thrift差不多，但是关键字不一样
+//service中有四种rpc方法类型
+service StudentService{
+    //1.发送一个request请求，返回一个response响应
+    rpc GetRealNameByUserName(MyRequest) returns (MyResponse){}
+    //2.发送一个request请求，返回一个stream响应
+    //虽然我们这里只是想传入一个int32（age），但是protobuf传入的参数必须是message类型，和thrift不同
+    //thrift是可以直接传入int，详细可看thrift
+    rpc GetStudentByAge(MyAge) returns (stream MyStudent){}
+
+}
+message MyRequest {
+    string username = 1;
+}
+message MyResponse {
+    string realName = 1;
+}
+message MyAge{
+    int32 age=1;
+}
+message MyStudent{
+    string name=1;
+    int32 age=2;
+    string city=3;
+}
+message MyStudentList{
+    MyStudent student=1;
+}
