@@ -12,3 +12,9 @@
 Gatering：在将数据读出到buffer中时，可以采用buffer数组，依次读入，一个buffer满了就读下一个。  
 9.Selector(选择器)是Java NIO中能够检测一到多个NIO通道，并能够知晓通道是否为诸如读写事件做好准备的组件。这样，一个单独的线程可以管理多个channel，从而管理多个网络连接
 ## :sleepy: nettyTest/文件夹下的知识点和技术
+使用netty技术完成服务端，步骤如下：
+1.创建两个事件循环组。bossGroup，workerGroup
+2.创建ServerBootstrap服务端，注入三个参数EventLoopGroup，NioServerSocketChannel.class，childHandler.(看代码)
+3.绑定一个端口，进行监听。bind(8899).sync()
+4.关闭监听，关闭事件循环组。
+## ::grin: nettyTestSecond/文件夹下的知识点和技术
