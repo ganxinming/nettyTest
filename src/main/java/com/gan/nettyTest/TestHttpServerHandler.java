@@ -40,7 +40,7 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
              * 具体可以查看chrome的请求
              */
             System.out.println("请求方法名:"+httpRequest.method().name());
-            //ByteBuf,neety中极为重要的概念，代表响应返回的数据
+            //ByteBuf,netty中极为重要的概念，代表响应返回的数据
             ByteBuf content = Unpooled.copiedBuffer("HelloWorld!", CharsetUtil.UTF_8);
             //构造一个http响应,HttpVersion.HTTP_1_1:采用http1.1协议，HttpResponseStatus.OK：状态码200
             FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1,
